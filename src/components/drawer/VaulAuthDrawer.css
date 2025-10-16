@@ -1,0 +1,111 @@
+/* Vaul Auth Drawer Styles */
+
+/* Screen reader only class for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.vaul-auth-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1051;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  outline: none;
+  box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.1),
+              0 -4px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  /* Smooth height transition - force it */
+  transition: height 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+              max-height 0.4s cubic-bezier(0.32, 0.72, 0, 1) !important;
+  will-change: height, max-height;
+}
+
+[data-theme="dark"] .vaul-auth-drawer {
+  background: #17151B;
+  border: 1px solid #17151B;
+  box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.3),
+              0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.vaul-auth-drawer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+.vaul-auth-drawer__handle {
+  width: 86px;
+  height: 4px;
+  margin: 0 auto 0.5rem auto;
+  background: #d1d5db;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .vaul-auth-drawer__handle {
+  background: #4b5563;
+}
+
+.vaul-auth-drawer__content {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Custom scrollbar for Vaul drawer */
+.vaul-auth-drawer__inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.vaul-auth-drawer__inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.vaul-auth-drawer__inner::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+[data-theme="dark"] .vaul-auth-drawer__inner::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.vaul-auth-drawer__inner::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+[data-theme="dark"] .vaul-auth-drawer__inner::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Ensure smooth content transitions */
+.vaul-auth-drawer .auth-drawer__form {
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Dark mode support for Vaul overlay */
+[data-theme="dark"] .vaul-auth-drawer + .fixed.inset-0 {
+  background: rgba(0, 0, 0, 0.6);
+}
+
