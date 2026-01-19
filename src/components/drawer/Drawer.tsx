@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './Drawer.css';
 
@@ -1198,21 +1198,21 @@ export const Drawer: React.FC<DrawerProps> = ({
     size === 'fullscreen' ? 'fullscreen' : `size-${size}`,
   ]);
 
-  const panelStyle: React.CSSProperties = {
-    height: (() => {
-      // Use real-time height during drag for smooth following
-      if (dragState.isDragging && dragState.realTimeHeight && isVertical) {
-        return `${dragState.realTimeHeight}px`;
-      }
-      // Use mode-based height when not dragging
-      return currentHeight ? `${currentHeight}px` : undefined;
-    })(),
-    transform: (() => {
-      if (!dragState.isDragging) return undefined;
-      
-      const transforms = [];
-      
-      // Offset transform
+  // 🚀 PERFORMANCE: Memoize panel style to avoid recalculation on unrelated renders
+  const panelStyle = useMemo<React.CSSProperties>(() => {
+    const style: React.CSSProperties = {};
+
+    // Height calculation
+    if (dragState.isDragging && dragState.realTimeHeight && isVertical) {
+      style.height = `${dragState.realTimeHeight}px`;
+    } else if (currentHeight) {
+      style.height = `${currentHeight}px`;
+    }
+
+    // Transform calculation
+    if (dragState.isDragging) {
+      const transforms: string[] = [];
+
       if (dragState.offset > 0) {
         switch (side) {
           case 'left': transforms.push(`translateX(${-dragState.offset}px)`); break;
@@ -1221,35 +1221,44 @@ export const Drawer: React.FC<DrawerProps> = ({
           case 'bottom': transforms.push(`translateY(${dragState.offset}px)`); break;
         }
       }
-      
-      // Scale transform for elongation effect
+
       if (dragState.scale !== 1) {
         if (side === 'left' || side === 'right') {
           transforms.push(`scaleX(${dragState.scale})`);
         } else {
-          // For top/bottom drawers, use scaleY for vertical elongation effect
           transforms.push(`scaleY(${dragState.scale})`);
         }
       }
-      
-      return transforms.length > 0 ? transforms.join(' ') : undefined;
-    })(),
-    transformOrigin: dragState.scale !== 1 ? (() => {
-      switch (side) {
-        case 'left': return 'left center !important';
-        case 'right': return 'right center !important';
-        case 'top': return 'center top !important';
-        case 'bottom': return 'center bottom !important';
-      }
-    })() : undefined,
-    transition: dragState.isDragging ? 'none' : undefined,
-    willChange: dragState.isDragging ? 'transform, height' : 'auto',
-  };
 
-  const backdropStyle: React.CSSProperties = dragState.isDragging ? {
-    opacity: Math.max(0.1, 1 - dragState.progress * 0.8),
-    transition: 'none'
-  } : {};
+      if (transforms.length > 0) {
+        style.transform = transforms.join(' ');
+      }
+
+      style.transition = 'none';
+      style.willChange = 'transform, height';
+    }
+
+    // Transform origin for scale effect
+    if (dragState.scale !== 1) {
+      switch (side) {
+        case 'left': style.transformOrigin = 'left center'; break;
+        case 'right': style.transformOrigin = 'right center'; break;
+        case 'top': style.transformOrigin = 'center top'; break;
+        case 'bottom': style.transformOrigin = 'center bottom'; break;
+      }
+    }
+
+    return style;
+  }, [dragState.isDragging, dragState.realTimeHeight, dragState.offset, dragState.scale, isVertical, currentHeight, side]);
+
+  // 🚀 PERFORMANCE: Memoize backdrop style
+  const backdropStyle = useMemo<React.CSSProperties>(() => {
+    if (!dragState.isDragging) return {};
+    return {
+      opacity: Math.max(0.1, 1 - dragState.progress * 0.8),
+      transition: 'none'
+    };
+  }, [dragState.isDragging, dragState.progress]);
 
   // Don't show backdrop in minimized mode
   const showBackdrop = backdrop && !isMinimized;

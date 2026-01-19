@@ -362,12 +362,22 @@ body.drawer-active-not-minimized {
 
 /* 🔥 DISABLE ALL transitions during drag for real-time response */
 .drawer[data-dragging="true"] .drawer__panel {
-  transition: none;
+  transition: none !important;
   will-change: transform, height;
   backface-visibility: hidden;
   transform-style: preserve-3d;
   /* Prevent jumping during elongation effect */
   transform-box: border-box;
+  /* 🚀 Force GPU layer isolation during drag */
+  isolation: isolate;
+}
+
+/* 🚀 Optimize backdrop during drag - reduce blur computation */
+.drawer[data-dragging="true"] .drawer__backdrop {
+  transition: none !important;
+  /* Reduce blur during drag for better performance */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Ensure header remains interactive in minimized mode */
