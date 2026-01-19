@@ -83,11 +83,13 @@ export const VaulAuthDrawer: React.FC<VaulAuthDrawerProps> = ({
             <Drawer.Title className="sr-only">
               {mode === 'signin' ? 'Sign In' : 'Sign Up'} Form
             </Drawer.Title>
-            
-            {/* Drag Handle */}
-            <div aria-hidden className="vaul-auth-drawer__handle" />
-            
-            {/* Tab Switcher */}
+
+            {/* Top Section with Drag Handle */}
+            <div className="vaul-auth-drawer__top">
+              <div aria-hidden className="vaul-auth-drawer__handle" />
+            </div>
+
+            {/* Tab Switcher with Indicator */}
             <div className="auth-drawer__tabs">
               <button
                 onClick={() => handleModeChange('signin')}
@@ -103,6 +105,12 @@ export const VaulAuthDrawer: React.FC<VaulAuthDrawerProps> = ({
               >
                 Sign Up
               </button>
+              <div
+                className="auth-drawer__tab-indicator"
+                style={{
+                  transform: mode === 'signin' ? 'translateX(0%)' : 'translateX(100%)',
+                }}
+              />
             </div>
 
             {/* Form Content */}

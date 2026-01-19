@@ -44,8 +44,8 @@
 .vaul-auth-drawer__inner {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.25rem;
+  gap: 0rem;
+  padding: 0;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -54,23 +54,52 @@
   scroll-behavior: smooth;
 }
 
+/* Top Section - Drag Handle Area */
+.vaul-auth-drawer__top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem 0.5rem;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  background: inherit;
+  z-index: 10;
+}
+
 .vaul-auth-drawer__handle {
-  width: 86px;
-  height: 4px;
-  margin: 0 auto 0.5rem auto;
+  width: 48px;
+  height: 5px;
   background: #d1d5db;
   border-radius: 9999px;
   flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.vaul-auth-drawer__handle:hover {
+  width: 64px;
+  background: #9ca3af;
 }
 
 [data-theme="dark"] .vaul-auth-drawer__handle {
   background: #4b5563;
 }
 
+[data-theme="dark"] .vaul-auth-drawer__handle:hover {
+  background: #6b7280;
+}
+
+/* Tabs Container - add padding here */
+.vaul-auth-drawer__inner .auth-drawer__tabs {
+  margin: 0 1.25rem 0.75rem;
+  position: relative;
+}
+
 .vaul-auth-drawer__content {
   width: 100%;
   max-width: 100%;
   margin: 0;
+  padding: 0 1.25rem 1.25rem;
 }
 
 /* Custom scrollbar for Vaul drawer */
