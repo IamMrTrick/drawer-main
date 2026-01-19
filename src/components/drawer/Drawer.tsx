@@ -135,10 +135,17 @@ function useLeftRightDrag(
     velocity: 0,
   });
 
+  // 🚀 PERFORMANCE: RAF batching ref
+  const rafIdRef = useRef<number | null>(null);
+  const pendingStateRef = useRef<typeof dragState | null>(null);
+
   useEffect(() => {
     if (!active) return;
     const panel = panelRef.current;
     if (!panel) return;
+
+    // 🚀 PERFORMANCE: Cache width to avoid repeated getBoundingClientRect calls
+    let cachedWidth: number | null = null;
 
     // Improved tracking with same logic as top/bottom
     const ref = {
@@ -157,7 +164,23 @@ function useLeftRightDrag(
     const CLOSE_THRESHOLD = 0.4;
     const VELOCITY_THRESHOLD = 0.5;
 
+    // 🚀 PERFORMANCE: Batched state update via RAF
+    function scheduleStateUpdate(newState: typeof dragState) {
+      pendingStateRef.current = newState;
+      if (rafIdRef.current === null) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          if (pendingStateRef.current) {
+            setDragState(pendingStateRef.current);
+            pendingStateRef.current = null;
+          }
+          rafIdRef.current = null;
+        });
+      }
+    }
+
     function onPointerDown(e: PointerEvent) {
+      // Reset cache on new drag
+      cachedWidth = null;
       const target = e.target as HTMLElement;
 
       ref.startX = e.clientX;
@@ -234,14 +257,18 @@ function useLeftRightDrag(
     }
 
     function updateDragVisuals(totalDelta: number) {
-      const width = panel.getBoundingClientRect().width;
+      // 🚀 PERFORMANCE: Use cached width to avoid layout thrashing
+      if (!cachedWidth) {
+        cachedWidth = panel.getBoundingClientRect().width;
+      }
+      const width = cachedWidth;
       const sign = side === 'left' ? -1 : 1; // left: negative closes, right: positive closes
       const closingDelta = totalDelta * sign;
-      
+
       let offset = 0;
       let progress = 0;
       let scale = 1;
-      
+
       if (closingDelta >= 0) {
         // CLOSING direction - smooth offset
         offset = Math.min(closingDelta, width);
@@ -260,8 +287,9 @@ function useLeftRightDrag(
         const smoothFactor = Math.pow(normalizedDistance, 2.0);
         scale = 1 + (smoothFactor * maxScale);
       }
-      
-      setDragState({
+
+      // 🚀 PERFORMANCE: Use RAF-batched state update
+      scheduleStateUpdate({
         isDragging: true,
         offset,
         progress,
@@ -376,6 +404,11 @@ function useLeftRightDrag(
       document.removeEventListener('touchmove', onTouchMove);
       document.removeEventListener('pointerup', onPointerUp);
       document.removeEventListener('touchend', onTouchEnd);
+      // 🚀 PERFORMANCE: Cancel any pending RAF on cleanup
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
     };
   }, [panelRef, side, active, onClose]);
 
@@ -407,6 +440,10 @@ function useTopBottomDrag(
     lastY: 0,
     velocity: 0,
   });
+
+  // 🚀 PERFORMANCE: RAF batching refs for top/bottom drag
+  const rafIdRef = useRef<number | null>(null);
+  const pendingStateRef = useRef<typeof dragState | null>(null);
 
   // Get drawer heights based on size
   const getHeights = useCallback(() => {
@@ -458,8 +495,28 @@ function useTopBottomDrag(
     const CLOSE_THRESHOLD = 0.4; // 40% travel to close
     const VELOCITY_THRESHOLD = 0.5; // px/ms for swipe detection
 
+    // 🚀 PERFORMANCE: Cache height to avoid repeated getBoundingClientRect calls
+    let cachedHeight: number | null = null;
+
+    // 🚀 PERFORMANCE: Batched state update via RAF
+    function scheduleStateUpdate(newState: typeof dragState) {
+      pendingStateRef.current = newState;
+      if (rafIdRef.current === null) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          if (pendingStateRef.current) {
+            setDragState(pendingStateRef.current);
+            pendingStateRef.current = null;
+          }
+          rafIdRef.current = null;
+        });
+      }
+    }
+
     function onPointerDown(e: PointerEvent) {
       const target = e.target as HTMLElement;
+
+      // 🚀 PERFORMANCE: Reset cache on new drag
+      cachedHeight = null;
 
       // Reset tracking state
       ref.startY = e.clientY;
@@ -473,7 +530,7 @@ function useTopBottomDrag(
       ref.isInteractiveTarget = !!(target.closest('button, a, [role="button"], input, select, textarea') || target.isContentEditable);
       ref.startedInBody = !!target.closest('.drawer__body');
       ref.gestureIgnored = !!target.closest('[data-drawer-gesture="ignore"], [data-gesture-ignore]');
-      
+
       // Don't prevent default or capture yet - allow native scrolling until drag commits
       setDragState(prev => ({ ...prev, isDragging: false }));
     }
@@ -738,7 +795,8 @@ function useTopBottomDrag(
         }
       }
       
-      setDragState({
+      // 🚀 PERFORMANCE: Use RAF-batched state update
+      scheduleStateUpdate({
         isDragging: true,
         offset,
         progress: Math.min(progress, 1),
@@ -903,6 +961,11 @@ function useTopBottomDrag(
       document.removeEventListener('touchmove', onTouchMove);
       document.removeEventListener('pointerup', onPointerUp);
       document.removeEventListener('touchend', onTouchEnd);
+      // 🚀 PERFORMANCE: Cancel any pending RAF on cleanup
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
     };
   }, [panelRef, side, active, expandMode, minimizeMode, mode, size, getHeights, onClose, onMinimize, onRestore]);
 
