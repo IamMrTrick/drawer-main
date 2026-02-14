@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import '@/components/drawer/Drawer.css'
 import './comparison-buttons.css'
@@ -6,11 +6,13 @@ import './comparison-buttons.css'
 export const metadata: Metadata = {
   title: 'Drawer Component Test',
   description: 'Interactive test page for the drawer component',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({

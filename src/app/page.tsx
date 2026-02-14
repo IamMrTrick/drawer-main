@@ -82,10 +82,10 @@ export default function HomePage() {
   return (
     <div className={`min-h-screen bg-gray-50 ${isDarkMode ? 'dark' : ''}`} data-theme={isDarkMode ? 'dark' : 'light'}>
       {/* Header */}
-      <header className="bg-white dark-bg-gray-900 shadow-sm border-b border-gray-200 dark-border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
+      <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-xl font-semibold text-gray-900 dark-text-white flex items-center gap-2">
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                 <path d="M2 17l10 5 10-5"/>
@@ -95,7 +95,7 @@ export default function HomePage() {
             </h1>
             <button
               onClick={toggleDarkMode}
-              className="px-3 py-2 bg-gray-100 dark-bg-gray-800 text-gray-700 dark-text-gray-300 rounded-lg hover-bg-gray-200 dark-hover-bg-gray-700 transition-colors"
+              className="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
               {isDarkMode ? (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline">
@@ -113,13 +113,13 @@ export default function HomePage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Auth Drawer Comparison Demo */}
         <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-8 shadow-sm border border-blue-200 dark:border-blue-800">
-          <h2 className="text-2xl font-semibold text-gray-900 dark-text-white mb-3 text-center">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3 text-center">
             Drawer Performance Comparison
           </h2>
-          <p className="text-gray-600 dark-text-gray-400 mb-8 text-center max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-center max-w-2xl mx-auto">
             Compare our custom drawer vs Vaul library. Both have Sign In/Sign Up with dynamic height. Test performance, smoothness, and features!
           </p>
           <div className="flex flex-col gap-4 max-w-2xl mx-auto">
@@ -177,8 +177,8 @@ export default function HomePage() {
 
         {/* OLD CONTENT REMOVED - Starting here */}
         <div className="hidden">
-          <div className="bg-white dark-bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-200 dark-border-gray-700">
-            <h2 className="text-lg font-medium text-gray-900 dark-text-white mb-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-6">
               Drawer Settings
             </h2>
 
@@ -186,13 +186,13 @@ export default function HomePage() {
               {/* Position & Size */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark-text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Side
                   </label>
                   <select
                     value={settings.side}
                     onChange={(e) => updateSetting('side', e.target.value as DrawerSide)}
-                    className="w-full px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="left">Left</option>
                     <option value="right">Right</option>
@@ -201,13 +201,13 @@ export default function HomePage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark-text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Size
                   </label>
                   <select
                     value={settings.size}
                     onChange={(e) => updateSetting('size', e.target.value as DrawerSize)}
-                    className="w-full px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
                     disabled={settings.fullscreen}
                   >
                     <option value="s">Small</option>
@@ -220,7 +220,7 @@ export default function HomePage() {
 
               {/* Content Settings */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark-text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Title
                 </label>
                 <div className="flex gap-2">
@@ -228,12 +228,12 @@ export default function HomePage() {
                     type="text"
                     value={settings.title}
                     onChange={(e) => updateSetting('title', e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500"
+                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter drawer title"
                   />
                   <button
                     onClick={() => updateSetting('title', '')}
-                    className="px-3 py-2 bg-red-500 text-white rounded-lg hover-bg-red-600 transition-colors"
+                    className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                     title="Clear title"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -247,7 +247,7 @@ export default function HomePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark-text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Description
                 </label>
                 <div className="flex gap-2">
@@ -255,12 +255,12 @@ export default function HomePage() {
                     type="text"
                     value={settings.description}
                     onChange={(e) => updateSetting('description', e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500"
+                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter drawer description"
                   />
                   <button
                     onClick={() => updateSetting('description', '')}
-                    className="px-3 py-2 bg-red-500 text-white rounded-lg hover-bg-red-600 transition-colors"
+                    className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                     title="Clear description"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -274,20 +274,20 @@ export default function HomePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark-text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Content
                 </label>
                 <textarea
                   value={settings.content}
                   onChange={(e) => updateSetting('content', e.target.value)}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter drawer content"
                 />
                 <div className="mt-2 flex gap-2">
                   <button
                     onClick={() => updateSetting('content', generateLongContent())}
-                    className="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded hover-bg-blue-200 dark:hover-bg-blue-800 transition-colors flex items-center gap-1"
+                    className="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors flex items-center gap-1"
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -300,7 +300,7 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={() => updateSetting('content', '')}
-                    className="px-3 py-1 text-xs bg-red-500 text-white rounded hover-bg-red-600 transition-colors flex items-center gap-1"
+                    className="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 transition-colors flex items-center gap-1"
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="3,6 5,6 21,6"/>
@@ -315,13 +315,13 @@ export default function HomePage() {
 
               {/* Behavior Settings */}
               <div className="space-y-4">
-                <h3 className="text-md font-medium text-gray-900 dark-text-white">
+                <h3 className="text-md font-medium text-gray-900 dark:text-white">
                   Behavior Options
                 </h3>
 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">Scrollable Content</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Scrollable Content</span>
                     <label className="toggle-switch">
                       <input
                         type="checkbox"
@@ -333,7 +333,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">Fullscreen Mode</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Fullscreen Mode</span>
                     <label className="toggle-switch">
                       <input
                         type="checkbox"
@@ -345,7 +345,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">
+                    <span className="text-sm text-gray-700 dark:text-gray-300">
                       Expand Mode {(settings.side === 'left' || settings.side === 'right') && '(Top/Bottom only)'}
                     </span>
                     <label className="toggle-switch">
@@ -360,7 +360,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">
+                    <span className="text-sm text-gray-700 dark:text-gray-300">
                       Minimize Mode {(settings.side === 'left' || settings.side === 'right') && '(Top/Bottom only)'}
                     </span>
                     <label className="toggle-switch">
@@ -375,7 +375,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">Show Backdrop</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Show Backdrop</span>
                     <label className="toggle-switch">
                       <input
                         type="checkbox"
@@ -387,7 +387,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">Dismissible (ESC key)</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Dismissible (ESC key)</span>
                     <label className="toggle-switch">
                       <input
                         type="checkbox"
@@ -399,7 +399,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700 dark-text-gray-300">Swipe to Close</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Swipe to Close</span>
                     <label className="toggle-switch">
                       <input
                         type="checkbox"
@@ -413,40 +413,40 @@ export default function HomePage() {
 
                 {/* Offset Settings */}
                 <div className="space-y-4">
-                  <h4 className="text-sm font-medium text-gray-900 dark-text-white">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">
                     Position Offsets (px)
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-gray-600 dark-text-gray-400 mb-1">
+                      <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                         Bottom Offset
                       </label>
                       <input
                         type="number"
                         value={settings.bottomOffset}
                         onChange={(e) => updateSetting('bottomOffset', parseInt(e.target.value) || 0)}
-                        className="w-full px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500 text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 text-sm"
                         placeholder="0"
                         min="0"
                         max="200"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-600 dark-text-gray-400 mb-1">
+                      <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                         Top Offset
                       </label>
                       <input
                         type="number"
                         value={settings.topOffset}
                         onChange={(e) => updateSetting('topOffset', parseInt(e.target.value) || 0)}
-                        className="w-full px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-800 text-gray-900 dark-text-white focus-ring-2 focus-ring-blue-500 text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 text-sm"
                         placeholder="0"
                         min="0"
                         max="200"
                       />
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 dark-text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     Useful for avoiding navigation bars or status bars
                   </p>
                 </div>
@@ -456,7 +456,7 @@ export default function HomePage() {
               <div className="pt-4 hidden md:block">
                 <button
                   onClick={openDrawer}
-                  className="w-full px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover-bg-blue-700 transition-colors shadow-sm flex items-center justify-center gap-2"
+                  className="w-full px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm flex items-center justify-center gap-2"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
@@ -470,40 +470,40 @@ export default function HomePage() {
           </div>
 
           {/* Preview Panel */}
-          <div className="bg-white dark-bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-200 dark-border-gray-700">
-            <h2 className="text-lg font-medium text-gray-900 dark-text-white mb-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-6">
               Current Configuration
             </h2>
 
             <div className="space-y-4">
-              <div className="bg-gray-50 dark-bg-gray-800 p-4 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark-text-white mb-2">Position & Size</h3>
-                <p className="text-sm text-gray-600 dark-text-gray-400">
+              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                <h3 className="font-medium text-gray-900 dark:text-white mb-2">Position & Size</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   <strong>Side:</strong> {settings.side.charAt(0).toUpperCase() + settings.side.slice(1)} |
                   <strong> Size:</strong> {settings.fullscreen ? 'Fullscreen' : settings.size.toUpperCase()}<br/>
                   <strong>Offsets:</strong> Bottom: {settings.bottomOffset}px, Top: {settings.topOffset}px
                 </p>
               </div>
 
-              <div className="bg-gray-50 dark-bg-gray-800 p-4 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark-text-white mb-2">Content</h3>
-                <p className="text-sm text-gray-600 dark-text-gray-400">
+              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                <h3 className="font-medium text-gray-900 dark:text-white mb-2">Content</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   <strong>Title:</strong> {settings.title || 'No title'}<br/>
                   <strong>Description:</strong> {settings.description || 'No description'}<br/>
                   <strong>Content Length:</strong> {settings.content.length} characters
                 </p>
               </div>
 
-              <div className="bg-gray-50 dark-bg-gray-800 p-4 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark-text-white mb-2">Active Features</h3>
+              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                <h3 className="font-medium text-gray-900 dark:text-white mb-2">Active Features</h3>
                 <div className="flex flex-wrap gap-1">
                   {settings.scrollable && <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">Scrollable</span>}
                   {settings.fullscreen && <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-xs">Fullscreen</span>}
                   {settings.expandMode && <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">Expandable</span>}
                   {settings.minimizeMode && <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded text-xs">Minimizable</span>}
-                  {settings.backdrop && <span className="px-2 py-1 bg-gray-100 dark-bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs">Backdrop</span>}
-                  {settings.dismissible && <span className="px-2 py-1 bg-gray-100 dark-bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs">Dismissible</span>}
-                  {settings.swipeToClose && <span className="px-2 py-1 bg-gray-100 dark-bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs">Swipe Close</span>}
+                  {settings.backdrop && <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs">Backdrop</span>}
+                  {settings.dismissible && <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs">Dismissible</span>}
+                  {settings.swipeToClose && <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs">Swipe Close</span>}
                 </div>
               </div>
 
@@ -530,11 +530,11 @@ export default function HomePage() {
         </div>
 
         <div className="hidden">
-        <div className="mt-8 bg-white dark-bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-200 dark-border-gray-700">
-          <h2 className="text-lg font-medium text-gray-900 dark-text-white mb-4">
+        <div className="mt-8 bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
             Quick Presets
           </h2>
-          <div className="grid grid-cols-1 md-grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <button
               onClick={() => setSettings({
                 side: 'bottom',
@@ -552,7 +552,7 @@ export default function HomePage() {
                 bottomOffset: 80,
                 topOffset: 0
               })}
-              className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover-bg-blue-100 dark:hover-bg-blue-900/30 transition-colors text-left"
+              className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors text-left"
             >
               <h3 className="font-medium text-blue-900 dark:text-blue-200 mb-1">Mobile Bottom Sheet</h3>
               <p className="text-sm text-blue-700 dark:text-blue-300">Expandable & minimizable</p>
@@ -575,7 +575,7 @@ export default function HomePage() {
                 bottomOffset: 0,
                 topOffset: 0
               })}
-              className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover-bg-green-100 dark:hover-bg-green-900/30 transition-colors text-left"
+              className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors text-left"
             >
               <h3 className="font-medium text-green-900 dark:text-green-200 mb-1">Sidebar Panel</h3>
               <p className="text-sm text-green-700 dark:text-green-300">Scrollable content</p>
@@ -598,7 +598,7 @@ export default function HomePage() {
                 bottomOffset: 0,
                 topOffset: 0
               })}
-              className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800 hover-bg-purple-100 dark:hover-bg-purple-900/30 transition-colors text-left"
+              className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors text-left"
             >
               <h3 className="font-medium text-purple-900 dark:text-purple-200 mb-1">Fullscreen Modal</h3>
               <p className="text-sm text-purple-700 dark:text-purple-300">Immersive experience</p>
@@ -621,7 +621,7 @@ export default function HomePage() {
                 bottomOffset: 0,
                 topOffset: 60
               })}
-              className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800 hover-bg-orange-100 dark:hover-bg-orange-900/30 transition-colors text-left"
+              className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800 hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors text-left"
             >
               <h3 className="font-medium text-orange-900 dark:text-orange-200 mb-1">Notification Bar</h3>
               <p className="text-sm text-orange-700 dark:text-orange-300">Minimizable notification</p>
@@ -683,24 +683,24 @@ export default function HomePage() {
       >
         <div className="space-y-4">
           {settings.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-gray-600 dark-text-gray-400">
+            <p key={index} className="text-gray-600 dark:text-gray-400">
               {paragraph}
             </p>
           ))}
 
-          <div className="mt-6 p-4 bg-gray-50 dark-bg-gray-800 rounded-lg">
-            <h4 className="font-medium text-gray-900 dark-text-white mb-2">Interactive Elements</h4>
+          <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <h4 className="font-medium text-gray-900 dark:text-white mb-2">Interactive Elements</h4>
             <div className="space-y-3">
-              <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover-bg-blue-700 transition-colors">
+              <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                 Sample Action Button
               </button>
               <div className="flex gap-2">
                 <input
                   type="text"
                   placeholder="Test input field"
-                  className="flex-1 px-3 py-2 border border-gray-300 dark-border-gray-600 rounded-lg bg-white dark-bg-gray-700 text-gray-900 dark-text-white"
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
-                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover-bg-green-700 transition-colors">
+                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
                   Submit
                 </button>
               </div>
